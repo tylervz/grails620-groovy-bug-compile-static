@@ -38,9 +38,7 @@ class SessionItemGroupController {
     def deleteMultiple() {
         try {
             List<Long> longIds = ((String) params.ids)?.split(',')?.collect { String id -> id.toLong() }
-            List<SessionItemGroup> sessionItemGroups = SessionItemGroup.getAll(longIds)
-            // This commented out line works. The line above throws a static type check error.
-            // List<SessionItemGroup> sessionItemGroups = SessionItemGroup.getAll(longIds as Iterable<Serializable>)
+            List<SessionItemGroup> sessionItemGroups = SessionItemGroup.getAll(longIds as Iterable<Serializable>)
 
             if (sessionItemGroups.contains(null)) {
                 notFound()
